@@ -18,3 +18,7 @@ SELECT * FROM usuarios WHERE idade = 24;
 SELECT * FROM usuarios WHERE nome = "Lucas Santos";
 
 SELECT * FROM usuarios WHERE idade >= 18;
+
+DELETE FROM usuarios WHERE nome = "Luis";
+
+UPDATE usuarios SET nome = "Nome de teste", email = "teste@teste.com", idade = 99 WHERE nome = "Nome de teste";
