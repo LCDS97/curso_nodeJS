@@ -5,34 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja de Games</title>
+    
 </head>
 <body>
     <hr>
     <h4>Lista de Games</h4>
-    <ul id="games">
+    <form action="http://localhost:4000/games">
+        <button type="submit">Atualizar</button>
+    </form>
+    <ul id="games"></ul>
+    <hr>
+    <h4>Novo jogo</h4>
+        <input type="text" name="title" id="title" placeholder="Título do jogo"><br>
+        <input type="number" name="year" id="year" placeholder="Ano do jogo"><br>
+        <input type="number" name="price" id="price" placeholder="Preço do jogo"><br>
+    <button type="button" onclick="createGame()">Criar</button>
 
-    </ul>
+    <h4>Editar jogo</h4>
+        <input type="text" name="idEdit" id="idEdit" placeholder="ID" readonly><br>
+        <input type="text" name="titleEdit" id="titleEdit" placeholder="Título do jogo"><br>
+        <input type="number" name="yearEdit" id="yearEdit" placeholder="Ano do jogo"><br>
+        <input type="number" name="priceEdit" id="priceEdit" placeholder="Preço do jogo"><br>
+    <button type="button" onclick="updateGame()">Atualizar</button>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
-    // Retornando dados da API da seção 13 com Axios
-    axios.get("http://localhost:4000/games").then(response => {
-        // Armazenando dados do response em array numa variavel
-        var games = response.data;
-
-        // Acessando lista do body através do id
-        var list = document.getElementById("games");
-
-        // Percorrendo o array de games e separando cada
-        games.forEach(game => {
-            var item = document.createElement("li");
-            item.innerHTML = game.id + " - " + game.title + " - $" + game.price;
-            list.appendChild(item);
-        });
-    }).catch(error => {
-        console.log(error);
-    });
-
-</script>
+<script src="app.js"></script>
 </html>
