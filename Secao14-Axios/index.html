@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Games</title>
+</head>
+<body>
+    <hr>
+    <h4>Lista de Games</h4>
+    <ul id="games">
+
+    </ul>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // Retornando dados da API da seção 13 com Axios
+    axios.get("http://localhost:4000/games").then(response => {
+        // Armazenando dados do response em array numa variavel
+        var games = response.data;
+
+        // Acessando lista do body através do id
+        var list = document.getElementById("games");
+
+        // Percorrendo o array de games e separando cada
+        games.forEach(game => {
+            var item = document.createElement("li");
+            item.innerHTML = game.id + " - " + game.title + " - $" + game.price;
+            list.appendChild(item);
+        });
+    }).catch(error => {
+        console.log(error);
+    });
+
+</script>
+</html>
