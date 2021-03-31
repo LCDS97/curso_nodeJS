@@ -15,6 +15,36 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
+// Criando middleware de autenticação
+function auth(req, res, next){
+    const authToken = req.headers['authorization'];
+
+    if(authToken != undefined){
+        // Cortando parte da string para verificzar token
+        const bearer = authToken.split(' ');
+        // Acessando o array do token pelo seu indice 2 no array
+        var token = bearer[1];
+
+        // Verificando se o token é valido
+        jwt.verify(token,JWTSecret,(err, data) => {
+            if(err){
+                res.status(401);
+                res.json({err: "Token invádlido"});
+            }else{
+                req.token = token;
+                req.loggedUser = {id: data.id, email: data.email}
+                next();
+            }
+        });
+
+
+    }else {
+        res.status(401);
+        res.json({err: "Token invalido"})
+    }
+    
+}
+
 var DB = {
     games: [
         {
@@ -56,12 +86,13 @@ var DB = {
     ]
 }
 
-app.get("/games", (req, res) => {
+app.get("/games", auth, (req, res) => {
     res.statusCode = 200;
-    res.json(DB.games);
+    res.json({user: req.loggedUser, games: DB.games});
+    
 });
 
-app.get("/games/:id",(req, res) => {
+app.get("/games/:id", auth,(req, res) => {
 
     if(isNaN(req.params.id)){
         res.sendStatus(400);
@@ -82,7 +113,7 @@ app.get("/games/:id",(req, res) => {
 
 });
 
-app.post("/game", (req, res) => {
+app.post("/game", auth, (req, res) => {
 
     var {id, title, price, year} = req.body;
 
@@ -96,7 +127,7 @@ app.post("/game", (req, res) => {
     res.sendStatus(200);
 });
 
-app.delete("/game/:id",(req,res) => {
+app.delete("/game/:id", auth,(req,res) => {
     if(isNaN(req.params.id)) {
         res.sendStatus(400);
     }
@@ -116,7 +147,7 @@ app.delete("/game/:id",(req,res) => {
     }
 });
 
-app.put("/game/:id",(req, res) => {
+app.put("/game/:id", auth,(req, res) => {
   
     if(isNaN(req.params.id)){
         res.sendStatus(400);
