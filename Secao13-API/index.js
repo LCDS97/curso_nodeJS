@@ -86,13 +86,17 @@ var DB = {
     ]
 }
 
+
 app.get("/games", auth, (req, res) => {
-    res.statusCode = 200;
-    res.json(DB.games);
+
+   res.statusCode = 200;
+   res.json(DB.games)
     
 });
 
-app.get("/games/:id", auth,(req, res) => {
+app.get("/game/:id", auth,(req, res) => {
+
+    
 
     if(isNaN(req.params.id)){
         res.sendStatus(400);
@@ -100,11 +104,35 @@ app.get("/games/:id", auth,(req, res) => {
     else{
         var id = parseInt(req.params.id);
 
+        // Implementado HATEOAS da Seção 15
+        var HATEOAS = [
+            {
+                 href:"http://localhost:4040/game/"+id,
+                 method: "DELETE",
+                 rel: "delete_game"
+            },
+            {
+                 href:"http://localhost:4040/game/"+id,
+                 method: "PUT",
+                 rel: "edit_game"
+            },
+            {
+                 href:"http://localhost:4040/game/"+id,
+                 method: "GET",
+                 rel: "get_game"
+            },
+            {
+             href: "http://localhost:4040/games",
+             method: "GET",
+             rel: "get_all_games"
+            }
+        ]
+
         var game = DB.games.find(g => g.id == id);
 
         if(game != undefined){
             res.statusCode = 200;
-            res.json(game);
+            res.json({game, _links: HATEOAS});
         }
         else {
             res.sendStatus(404);
