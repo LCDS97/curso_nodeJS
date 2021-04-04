@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validação Formularios</title>
+</head>
+<body>
+    <form method="POST" action="/form">
+        <input type="email" name="email" id="email" placeholder="E-mail" value="<%= email %>"><br>
+        
+        <input type="text" name="name" id="name" placeholder="Nome" value="<%= name %>"><br>
+        
+        <input type="number" name="points" id="points" value="<%= points %>"><br>
+        
+        <button type="submit">Enviar</button><br>
+        <%= emailError %><br>
+        <%= nameError %><br>
+        <%= pointsError %><br>
+    </form>
+</body>
+</html>
