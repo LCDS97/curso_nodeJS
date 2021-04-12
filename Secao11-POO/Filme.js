@@ -121,5 +121,5 @@ var Matrix = new FilmeComParametro("Matrix",1997,"Ficção","Famoso","3 horas")
 console.log("------------------------------------")
 
 Matrix.Ficha();
-
+// O this representa o objeto, por isso em toda cláusula this ele substitui pela varíavel que foi definida no parametro
 
