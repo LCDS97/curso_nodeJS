@@ -1,6 +1,6 @@
 // Arquivos de Classe, Sempre com letra Maiuscula no final do arquivo para boas praticas
 class Filme{
-    constructor(titulo,ano,genero,diretor,duracao){
+    constructor(){
 
         // Definindo atributos
         // Sempre com this e nome do atributo, por padrão, é definido somente os atributos sem os valores (Definir como vazio ou zerado/nulo)
