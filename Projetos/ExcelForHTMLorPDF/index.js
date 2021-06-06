@@ -12,3 +12,12 @@ fs.readFile("./lucas.json",{encoding: 'utf-8'},(err, data) => {
     }
 })
 
+json = {
+    "novo nome": "nome novo"
+}
+
+fs.writeFile("./lucas.json", JSON.stringify(json),(err) => {
+    if (err) {
+        console.error(err)
+    }
+})
