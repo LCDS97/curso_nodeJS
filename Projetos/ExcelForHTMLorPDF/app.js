@@ -10,7 +10,10 @@ async function main() {
 
     var usuarios = new Table(dadosProcessados);
 
-    console.log(usuarios);
+    usuarios.rows.push(["João joão","é nada", 12])
+
+    console.log(usuarios.RowCount);
+    console.log(usuarios.ColumnCount);
 
 
 }
