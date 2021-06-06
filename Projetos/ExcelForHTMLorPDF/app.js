@@ -1,6 +1,7 @@
 var Reader = require("./Reader");
 var Processor = require("./Processor");
 var Table = require("./Table");
+var HtmlParser = require("./HtmlParser");
 
 var leitor = new Reader();
 
@@ -10,10 +11,11 @@ async function main() {
 
     var usuarios = new Table(dadosProcessados);
 
-    usuarios.rows.push(["João joão","é nada", 12])
 
-    console.log(usuarios.RowCount);
-    console.log(usuarios.ColumnCount);
+
+    var html = await HtmlParser.Parse(usuarios);
+
+    console.log(html)
 
 
 }
