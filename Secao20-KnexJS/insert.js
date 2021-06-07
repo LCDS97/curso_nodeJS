@@ -29,3 +29,5 @@ var query = database.insert(jogos).into("games").then(data => {
 }).catch(err => {
     console.log(err)
 })
+
+// !SECTION
