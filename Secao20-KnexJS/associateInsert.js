@@ -2,7 +2,7 @@
 
 var database = require("./database");
 
-// SECTION Tabela de 1:1 em Node
+// SECTION Para fazer inserção associada, somente é necessário adicionar seus campos respectitivos, e o valor da chave estrangeira tem que ser o mesmo na tabela referenciada
 
 
 database.insert({
